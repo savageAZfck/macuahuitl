@@ -1,0 +1,19 @@
+[package]
+name = "macuahuitl"
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.75"
+authors = ["Adam Clark <savagetism@icloud.com>"]
+repository = "https://github.com/savageAZfck/macuahuitl"
+homepage = "https://github.com/savageAZfck/macuahuitl"
+license = "MIT"
+description = "A streaming output firewall: Aho-Corasick pattern kill on the token stream as text forms, structural-form evasion checks, and in-place PII redaction — named for the Aztec obsidian-edged war club"
+keywords = ["firewall", "filter", "streaming", "aho-corasick", "safety"]
+categories = ["text-processing"]
+readme = "README.md"
+
+[dependencies]
+regex = "1.10"
+
+[features]
+default = []
