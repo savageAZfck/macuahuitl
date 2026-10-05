@@ -23,5 +23,9 @@ fn main() {
     for chunk in text.as_bytes().chunks(64) {
         s.push(std::str::from_utf8(chunk).unwrap());
     }
-    println!("streamed {:.1} MiB in 64B chunks: {:?}", text.len() as f64 / 1_048_576.0, t.elapsed());
+    println!(
+        "streamed {:.1} MiB in 64B chunks: {:?}",
+        text.len() as f64 / 1_048_576.0,
+        t.elapsed()
+    );
 }

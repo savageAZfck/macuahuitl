@@ -61,8 +61,7 @@ impl Automaton {
         while qi < queue.len() {
             let cur = queue[qi];
             qi += 1;
-            let children: Vec<(u8, usize)> =
-                a.next[cur].iter().map(|(&c, &n)| (c, n)).collect();
+            let children: Vec<(u8, usize)> = a.next[cur].iter().map(|(&c, &n)| (c, n)).collect();
             for (ch, child) in children {
                 let mut f = a.fail[cur];
                 while f != 0 && !a.next[f].contains_key(&ch) {
@@ -95,7 +94,9 @@ impl Automaton {
             for &pi in &self.output[cur] {
                 let len = self.pattern_lens[pi];
                 let end = i + 1;
-                let Some(start) = end.checked_sub(len) else { continue };
+                let Some(start) = end.checked_sub(len) else {
+                    continue;
+                };
                 if let Some(last) = last_end {
                     if start < last {
                         continue;
@@ -167,8 +168,7 @@ impl Firewall {
     /// Defaults merged with a blocklist file (one pattern per line,
     /// `#` comments and blank lines ignored).
     pub fn with_blocklist(blocklist_text: &str) -> Self {
-        let mut patterns: Vec<String> =
-            DEFAULT_PATTERNS.iter().map(|s| s.to_string()).collect();
+        let mut patterns: Vec<String> = DEFAULT_PATTERNS.iter().map(|s| s.to_string()).collect();
         patterns.extend(parse_blocklist(blocklist_text));
         Self::new(patterns)
     }

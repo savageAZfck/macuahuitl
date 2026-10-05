@@ -24,7 +24,10 @@ fn stream_kills_pattern_spanning_chunk_boundary() {
     // The pattern forms across two chunks — caught as it forms.
     let f = fw();
     let mut s = f.stream();
-    assert!(matches!(s.push("here comes the forbidden "), Verdict::Emit(_)));
+    assert!(matches!(
+        s.push("here comes the forbidden "),
+        Verdict::Emit(_)
+    ));
     assert_eq!(s.push("fruit salad"), Verdict::Blocked);
     assert!(s.is_blocked());
     // Once dead, stays dead.
@@ -45,8 +48,11 @@ fn clean_stream_passes_through() {
 fn structural_form_catches_reformatted_keys() {
     // "BEGIN PRIVATE KEY" written with dashes — structural form matches.
     let f = Firewall::with_blocklist("");
-    assert!(f.check("here: B-E-G-I-N-P-R-I-V-A-T-E-K-E-Y").contains(BLOCKED_MARKER)
-        || f.check("BEGIN---PRIVATE---KEY").contains(BLOCKED_MARKER));
+    assert!(
+        f.check("here: B-E-G-I-N-P-R-I-V-A-T-E-K-E-Y")
+            .contains(BLOCKED_MARKER)
+            || f.check("BEGIN---PRIVATE---KEY").contains(BLOCKED_MARKER)
+    );
     assert!(f.check("BEGIN PRIVATE KEY").contains(BLOCKED_MARKER));
 }
 
@@ -54,7 +60,9 @@ fn structural_form_catches_reformatted_keys() {
 fn defaults_block_key_material() {
     let f = Firewall::with_blocklist("");
     assert!(f.check("ssh-rsa AAAAB3...").contains(BLOCKED_MARKER));
-    assert!(f.check("-----BEGIN RSA PRIVATE KEY-----").contains(BLOCKED_MARKER));
+    assert!(f
+        .check("-----BEGIN RSA PRIVATE KEY-----")
+        .contains(BLOCKED_MARKER));
 }
 
 #[test]

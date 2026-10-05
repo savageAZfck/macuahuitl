@@ -5,8 +5,11 @@ fn main() {
 
     // A model streaming tokens — the secret forms across the boundary.
     let chunks = [
-        "The user asks for ", "the forbidden ", "fruit recipe: first ",
-        "take the sec", "ret ingredient…",
+        "The user asks for ",
+        "the forbidden ",
+        "fruit recipe: first ",
+        "take the sec",
+        "ret ingredient…",
     ];
 
     let mut stream = fw.stream();
